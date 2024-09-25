@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import { div } from "framer-motion/client";
+import { Link } from "react-router-dom";
 
 function Veggie() {
   const [veggie, setVeggie] = useState([]);
@@ -19,7 +20,7 @@ function Veggie() {
       } else {
           try {
               const api = await fetch(
-                  `https://api.spoonacular.com/recipes/random?apiKey=7d642f5d7c774867b7ea79a7008d6c17&number=9&vegetarian`
+                  `https://api.spoonacular.com/recipes/random?apiKey=d051999aa4f04cbf8bda18878c42746f&number=9&vegetarian`
               );
               const data = await api.json();
               
@@ -49,9 +50,11 @@ function Veggie() {
         {veggie.map((recipe) => (
             <SplideSlide key={recipe.id}>
                 <Card>
+                    <Link to={'/recipe/'+recipe.id}>
                     <p>{recipe.title}</p>
                     <img src={recipe.image} alt={recipe.title} />
                     <Gradient/>
+                    </Link>
                 </Card>
             </SplideSlide>
         ))}
